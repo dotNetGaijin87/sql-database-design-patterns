@@ -1,6 +1,6 @@
 # 025 — Query-Optimizer Statistics
 
-**Script:** [`src/025_statistics.sql`](../../src/025_statistics.sql) · [Pattern index](../../README.md#the-26-patterns)
+**Script:** [`src/025_statistics.sql`](../../src/025_statistics.sql) · [Pattern index](../../README.en.md#the-26-patterns)
 
 ## The problem
 The optimizer's row estimates — and therefore plan quality and memory grants — depend entirely on **statistics**. When data is skewed or histograms go stale, the optimizer guesses wrong and you get scans, bad join choices, and bloated memory grants. To fix a bad plan, you first have to be able to *read* why the optimizer chose it.
@@ -15,4 +15,4 @@ Inspects statistics objects (the histogram and the density vector), builds a del
 Filtered and manually-maintained statistics add maintenance overhead and can themselves go stale. Disabling `AUTO_UPDATE_STATISTICS` (or relying on parameterized predicates that fall back to the density vector) leads to poor estimates. Manual statistics management should be reserved for known skew or very large tables — for everything else, let SQL Server manage stats automatically.
 
 ---
-[← 024 Numbers/calendar tables & indexed views](024-precalculated-tables-and-indexed-views.md) · [Pattern index](../../README.md#the-26-patterns)
+[← 024 Numbers/calendar tables & indexed views](024-precalculated-tables-and-indexed-views.md) · [Pattern index](../../README.en.md#the-26-patterns)

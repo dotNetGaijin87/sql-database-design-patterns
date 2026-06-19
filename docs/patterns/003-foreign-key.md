@@ -1,6 +1,6 @@
 # 003 — Indexing Foreign Keys
 
-**Script:** [`src/003_foreign_key.sql`](../../src/003_foreign_key.sql) · [Pattern index](../../README.md#the-26-patterns)
+**Script:** [`src/003_foreign_key.sql`](../../src/003_foreign_key.sql) · [Pattern index](../../README.en.md#the-26-patterns)
 
 ## The problem
 SQL Server automatically indexes primary keys but **not** foreign-key columns. As a result, cascade deletes and parent→child joins on the child side can trigger full table scans once the child table gets large — a classic, easy-to-miss performance cliff.
@@ -15,4 +15,4 @@ Builds parent/child tables and demonstrates the I/O cost of cascade deletes and 
 Indexing *every* FK adds write and storage overhead. On FK columns that are rarely filtered or joined, and whose parent rows are rarely deleted, the index may never pay for itself. The "missing FK index" view is a starting point for investigation, not a mandate to index everything it returns.
 
 ---
-[← 002 Indexing strategy](002-indexing-strategy.md) · [Pattern index](../../README.md#the-26-patterns) · [next → 004 Extracting sensitive columns](004-splitting-customer-table.md)
+[← 002 Indexing strategy](002-indexing-strategy.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 004 Extracting sensitive columns](004-splitting-customer-table.md)

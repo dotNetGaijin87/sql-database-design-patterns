@@ -1,6 +1,6 @@
 # 002 — Indexing Strategy
 
-**Script:** [`src/002_indexing_strategy.sql`](../../src/002_indexing_strategy.sql) · [Pattern index](../../README.md#the-26-patterns)
+**Script:** [`src/002_indexing_strategy.sql`](../../src/002_indexing_strategy.sql) · [Pattern index](../../README.en.md#the-26-patterns)
 
 ## The problem
 "Add an index" is the universal advice — but *which* index, on *which* columns, in *which* order, actually makes a given query fast? Developers need to see how clustered-key choice, column order, included columns and covering indexes map onto real query shapes: filters, joins, `ORDER BY`, `GROUP BY` and aggregates.
@@ -15,4 +15,4 @@ Clustered vs. nonclustered indexes, unique indexes, composite indexes, `INCLUDE`
 Every additional index costs storage and slows down `INSERT` / `UPDATE` / `DELETE`. Over-indexing — and especially duplicate or overlapping indexes — quietly degrades write throughput. Indexes should match the *real* workload, not be added speculatively because a column "looks searchable."
 
 ---
-[← 001 Natural vs. surrogate keys](001-primary-key.md) · [Pattern index](../../README.md#the-26-patterns) · [next → 003 Indexing foreign keys](003-foreign-key.md)
+[← 001 Natural vs. surrogate keys](001-primary-key.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 003 Indexing foreign keys](003-foreign-key.md)

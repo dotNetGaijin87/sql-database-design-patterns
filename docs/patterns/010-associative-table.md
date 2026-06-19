@@ -1,6 +1,6 @@
 # 010 — Many-to-Many (Junction Table)
 
-**Script:** [`src/010_associative_table.sql`](../../src/010_associative_table.sql) · [Pattern index](../../README.md#the-26-patterns)
+**Script:** [`src/010_associative_table.sql`](../../src/010_associative_table.sql) · [Pattern index](../../README.en.md#the-26-patterns)
 
 ## The problem
 A customer's wishlist is stored as a **comma-separated string of product names** in a single column. It's unqueryable ("which customers want product X?"), unvalidated (the names can drift from real products), and has zero referential integrity.
@@ -15,4 +15,4 @@ Associative/junction table, composite `PRIMARY KEY`, dual `FOREIGN KEY`s with ca
 The composite PK allows each product at most once per customer. A junction table is the *correct* model for many-to-many, but it does add join overhead compared to the (broken) single-column approach — the point is that the single-column approach was never actually saving you anything once you needed to query it.
 
 ---
-[← 009 Enum → lookup table](009-order-status-type-lookup-table.md) · [Pattern index](../../README.md#the-26-patterns) · [next → 011 Master-detail & filtered indexes](011-master-detail.md)
+[← 009 Enum → lookup table](009-order-status-type-lookup-table.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 011 Master-detail & filtered indexes](011-master-detail.md)

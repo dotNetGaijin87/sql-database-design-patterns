@@ -1,6 +1,6 @@
 # 009 — Enum → Lookup Table
 
-**Script:** [`src/009_order_status_type_lookup_table.sql`](../../src/009_order_status_type_lookup_table.sql) · [Pattern index](../../README.md#the-26-patterns)
+**Script:** [`src/009_order_status_type_lookup_table.sql`](../../src/009_order_status_type_lookup_table.sql) · [Pattern index](../../README.en.md#the-26-patterns)
 
 ## The problem
 Order status is stored as a free-text string on every order. That wastes space, allows typos, and gives you no referential control over which statuses are even valid.
@@ -15,4 +15,4 @@ Creates a `sales.order_status_type` lookup table (a compact `TINYINT` key) seede
 Every status read now needs a join to resolve the human-readable name, and adding a status becomes a data insert rather than a code change. This normalization is overkill for a status set that never changes and is only ever displayed via application-side constants — in that case an enum in code (or a `CHECK` constraint) is simpler.
 
 ---
-[← 008 Reference table](008-state-lookup-table.md) · [Pattern index](../../README.md#the-26-patterns) · [next → 010 Many-to-many](010-associative-table.md)
+[← 008 Reference table](008-state-lookup-table.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 010 Many-to-many](010-associative-table.md)
