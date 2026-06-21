@@ -1,8 +1,10 @@
-# Advanced Database Design Patterns in Action
+# 実践 リレーショナルデータベース設計パターン 25 選
+
+<sub>Advanced Database Design Patterns in Action</sub>
 
 [🇬🇧 English](README.en.md) ｜ **🇯🇵 日本語**
 
-> SQL Server を題材に、リレーショナルデータベースの設計パターンを **26 個**、ひとつの `OnlineStore` スキーマを **段階的に育てながら** 実装した教材です。素朴で問題を含んだ初期設計から出発し、正規化・パーティショニング・履歴管理・セキュリティ・性能チューニングを施した、実用的なモデルへと進化させていきます。
+> SQL Server を題材に、リレーショナルデータベースの設計パターンを **25 個**、ひとつの `OnlineStore` スキーマを **段階的に育てながら** 実装した教材です。素朴で問題を含んだ初期設計から出発し、正規化・パーティショニング・履歴管理・セキュリティ・性能チューニングを施した、実用的なモデルへと進化させていきます。
 
 このリポジトリは **26 本のマイグレーションスクリプトの連なり** として構成しています。それぞれが、アプリケーション開発の現場で実際に直面する設計判断を 1 つずつ題材にしています —— 例えば _「価格の変更履歴をどう追跡するか」_、_「ウィッシュリストをどう保存するか」_、_「このカラムが読み取り性能を落としている。どうするか」_ といった問いです。そして各スクリプトの最後には、**トレードオフ** と **採用すべきでない場面** についての率直なメモを添えています。
 
@@ -231,38 +233,38 @@ erDiagram
 
 ---
 
-## 26 のパターン
+## 25 のパターン
 
-各行から、**実行可能な SQL** と短い **解説（英語）** にリンクしています。「解決する課題」列は、各パターンが解決する問題を 1 行でまとめたものです。
+下表の `000` は出発点となる初期スキーマの準備で、それに続く `001`〜`025` が 25 個の設計パターンです。各行から、**実行可能な SQL** と短い **解説（英語）** にリンクしています。「解決する課題」列は、各パターンが解決する問題を 1 行でまとめたものです。
 
-| #   | パターン                                         | 解決する課題                                                              | スクリプト                                                 | 解説                                                                |
-| --- | ------------------------------------------------ | --------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------- |
-| 000 | 初期スキーマと診断用ツール                       | OnlineStore データベース・スキーマ・主要テーブルと、全体で使う診断用プロシージャ／ビューを用意する。                  | [sql](src/000_initial_schema_creation.sql)                 | [doc](docs/patterns/000-initial-schema.md)                          |
-| 001 | 自然キー vs 代理キー                             | 主キーに業務上の自然キーを使うか、自動採番の代理キーを使うかのトレードオフ。          | [sql](src/001_primary_key.sql)                             | [doc](docs/patterns/001-primary-key.md)                             |
-| 002 | インデックス戦略                                 | クラスター化キーの選択・列順・付加列・カバリングが、クエリの形ごとにどう効くか。                        | [sql](src/002_indexing_strategy.sql)                       | [doc](docs/patterns/002-indexing-strategy.md)                       |
-| 003 | 外部キーのインデックス                           | インデックスのない外部キー列がカスケード削除や結合を遅くする理由と、その発見・対処。          | [sql](src/003_foreign_key.sql)                             | [doc](docs/patterns/003-foreign-key.md)                             |
-| 004 | 機密カラムの分離（1 対多）                       | クレジットカード情報を顧客行から別テーブルへ分離する（1 対多）。            | [sql](src/004_splitting_customer_table.sql)                | [doc](docs/patterns/004-splitting-customer-table.md)                |
-| 005 | 無停止でのカラム分割                             | 新旧のコードを並行稼働させたまま、デュアルライトのトリガーで列を分割する。                      | [sql](src/005_splitting_name_column.sql)                   | [doc](docs/patterns/005-splitting-name-column.md)                   |
-| 006 | データクレンジングと形式の強制                   | 既存の不揃いなデータを整え、制約で形式を強制する。                  | [sql](src/006_simple_format.sql)                           | [doc](docs/patterns/006-simple-format.md)                           |
-| 007 | ルックアップテーブル（重複文字列の排除）         | 繰り返される自由記述の列を、参照するルックアップテーブルに置き換える。                      | [sql](src/007_vendor_lookup_table.sql)                     | [doc](docs/patterns/007-vendor-lookup-table.md)                     |
-| 008 | 参照テーブル（バリデーション）                   | 参照テーブルと外部キーで、列が有効な値だけを取るよう保証する。                        | [sql](src/008_state_lookup_table.sql)                      | [doc](docs/patterns/008-state-lookup-table.md)                      |
-| 009 | 列挙型 → ルックアップテーブル                    | 自由記述のステータスを、管理されたルックアップテーブルに置き換える。                    | [sql](src/009_order_status_type_lookup_table.sql)          | [doc](docs/patterns/009-order-status-type-lookup-table.md)          |
-| 010 | 多対多（中間テーブル）                           | 中間テーブルで多対多の関係をモデル化する。                  | [sql](src/010_associative_table.sql)                       | [doc](docs/patterns/010-associative-table.md)                       |
-| 011 | マスター・ディテールとフィルター選択インデックス | ヘッダー・明細の関係をモデル化し、選択的な検索にフィルター選択インデックスを使う。                    | [sql](src/011_master_detail.sql)                           | [doc](docs/patterns/011-master-detail.md)                           |
-| 012 | ステータス履歴とイベントソーシング               | 状態の変化を時系列で記録し、イベントログから現在の状態を再構築する。           | [sql](src/012_history_table_effective_date.sql)            | [doc](docs/patterns/012-history-table-effective-date.md)            |
-| 013 | 有効期間とシステムバージョン管理テーブル         | 日付範囲での有効期間と、自動管理されるシステムバージョン管理（テンポラル）履歴。                  | [sql](src/013_history_table_effective_start_end_dates.sql) | [doc](docs/patterns/013-history-table-effective-start-end-dates.md) |
-| 014 | 水平（範囲）パーティショニング                   | 大きなテーブルを範囲で分割し、即時アーカイブと高速な範囲検索を実現する。                | [sql](src/014_horizontal_partitioning.sql)                 | [doc](docs/patterns/014-horizontal-partitioning.md)                 |
-| 015 | 垂直パーティショニング                           | 参照頻度の低い列を別テーブルへ移し、よく使う行を狭く保つ。                 | [sql](src/015_vertical_partitioning.sql)                   | [doc](docs/patterns/015-vertical-partitioning.md)                   |
-| 016 | 階層データのモデリング                           | ツリー構造を、パス列挙と `hierarchyid` 型でモデル化する。   | [sql](src/016_modeling_hierarchical_data.sql)              | [doc](docs/patterns/016-modeling-hierarchical-data.md)              |
-| 017 | サブタイプテーブル（ソフトウェア）               | 種類ごとに固有の属性をサブタイプテーブルへ移す（スーパータイプ／サブタイプ）。          | [sql](src/017_software_product_table.sql)                  | [doc](docs/patterns/017-software-product-table.md)                  |
-| 018 | サブタイプテーブルと再構成ビュー                 | もう 1 つのサブタイプテーブルと、統一された商品の形を再構成するビュー。          | [sql](src/018_hardware_product_table.sql)                  | [doc](docs/patterns/018-hardware-product-table.md)                  |
-| 019 | 多言語データと照合順序                           | 多言語テキストを正しく保存・ソート・比較し、照合順序の落とし穴を避ける。      | [sql](src/019_handling_multilanguage_data.sql)             | [doc](docs/patterns/019-handling-multilanguage-data.md)             |
-| 020 | 論理削除（ソフトデリート）                       | 行を削除せず「削除済み」と印を付ける方法と、それに伴うクエリの変更。                                  | [sql](src/020_soft_delete.sql)                             | [doc](docs/patterns/020-soft-delete.md)                             |
-| 021 | JSON による非正規化                              | 参照の多い集約データを JSON ドキュメントとして保存し、繰り返しの結合を避ける。      | [sql](src/021_denormalization_with_json.sql)               | [doc](docs/patterns/021-denormalization-with-json.md)               |
-| 022 | 計算列と集計値の維持                             | 導出値（平均評価）を事前計算し、永続化・インデックス化して保つ。                        | [sql](src/022_computed_column.sql)                         | [doc](docs/patterns/022-computed-column.md)                         |
-| 023 | 機密データの保護（マスキング・暗号化）           | マスキング・ビュー・列暗号化により、ロールごとに PII の見え方を変える。 | [sql](src/023_sensitive_data_obfuscation.sql)              | [doc](docs/patterns/023-sensitive-data-obfuscation.md)              |
-| 024 | 連番・カレンダーテーブルとインデックス付きビュー | 事前計算した連番／カレンダーテーブルと、マテリアライズド（インデックス付き）集計ビュー。            | [sql](src/024_precalculated_tables_and_indexed_views.sql)  | [doc](docs/patterns/024-precalculated-tables-and-indexed-views.md)  |
-| 025 | クエリオプティマイザーの統計情報                 | 統計情報がオプティマイザーのプラン選択をどう左右し、古い／偏った統計が何を招くか。     | [sql](src/025_statistics.sql)                              | [doc](docs/patterns/025-statistics.md)                              |
+| #   | パターン                                         | 解決する課題                                                                                         | スクリプト                                                 | 解説                                                                |
+| --- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------- |
+| 000 | 初期スキーマと診断用ツール                       | OnlineStore データベース・スキーマ・主要テーブルと、全体で使う診断用プロシージャ／ビューを用意する。 | [sql](src/000_initial_schema_creation.sql)                 | [doc](docs/patterns/000-initial-schema.md)                          |
+| 001 | 自然キー vs 代理キー                             | 主キーに業務上の自然キーを使うか、自動採番の代理キーを使うかのトレードオフ。                         | [sql](src/001_primary_key.sql)                             | [doc](docs/patterns/001-primary-key.md)                             |
+| 002 | インデックス戦略                                 | クラスター化キーの選択・列順・付加列・カバリングが、クエリの形ごとにどう効くか。                     | [sql](src/002_indexing_strategy.sql)                       | [doc](docs/patterns/002-indexing-strategy.md)                       |
+| 003 | 外部キーのインデックス                           | インデックスのない外部キー列がカスケード削除や結合を遅くする理由と、その発見・対処。                 | [sql](src/003_foreign_key.sql)                             | [doc](docs/patterns/003-foreign-key.md)                             |
+| 004 | 機密カラムの分離（1 対多）                       | クレジットカード情報を顧客行から別テーブルへ分離する（1 対多）。                                     | [sql](src/004_splitting_customer_table.sql)                | [doc](docs/patterns/004-splitting-customer-table.md)                |
+| 005 | 無停止でのカラム分割                             | 新旧のコードを並行稼働させたまま、デュアルライトのトリガーで列を分割する。                           | [sql](src/005_splitting_name_column.sql)                   | [doc](docs/patterns/005-splitting-name-column.md)                   |
+| 006 | データクレンジングと形式の強制                   | 既存の不揃いなデータを整え、制約で形式を強制する。                                                   | [sql](src/006_simple_format.sql)                           | [doc](docs/patterns/006-simple-format.md)                           |
+| 007 | ルックアップテーブル（重複文字列の排除）         | 繰り返される自由記述の列を、参照するルックアップテーブルに置き換える。                               | [sql](src/007_vendor_lookup_table.sql)                     | [doc](docs/patterns/007-vendor-lookup-table.md)                     |
+| 008 | 参照テーブル（バリデーション）                   | 参照テーブルと外部キーで、列が有効な値だけを取るよう保証する。                                       | [sql](src/008_state_lookup_table.sql)                      | [doc](docs/patterns/008-state-lookup-table.md)                      |
+| 009 | 列挙型 → ルックアップテーブル                    | 自由記述のステータスを、管理されたルックアップテーブルに置き換える。                                 | [sql](src/009_order_status_type_lookup_table.sql)          | [doc](docs/patterns/009-order-status-type-lookup-table.md)          |
+| 010 | 多対多（中間テーブル）                           | 中間テーブルで多対多の関係をモデル化する。                                                           | [sql](src/010_associative_table.sql)                       | [doc](docs/patterns/010-associative-table.md)                       |
+| 011 | マスター・ディテールとフィルター選択インデックス | ヘッダー・明細の関係をモデル化し、選択的な検索にフィルター選択インデックスを使う。                   | [sql](src/011_master_detail.sql)                           | [doc](docs/patterns/011-master-detail.md)                           |
+| 012 | ステータス履歴とイベントソーシング               | 状態の変化を時系列で記録し、イベントログから現在の状態を再構築する。                                 | [sql](src/012_history_table_effective_date.sql)            | [doc](docs/patterns/012-history-table-effective-date.md)            |
+| 013 | 有効期間とシステムバージョン管理テーブル         | 日付範囲での有効期間と、自動管理されるシステムバージョン管理（テンポラル）履歴。                     | [sql](src/013_history_table_effective_start_end_dates.sql) | [doc](docs/patterns/013-history-table-effective-start-end-dates.md) |
+| 014 | 水平（範囲）パーティショニング                   | 大きなテーブルを範囲で分割し、即時アーカイブと高速な範囲検索を実現する。                             | [sql](src/014_horizontal_partitioning.sql)                 | [doc](docs/patterns/014-horizontal-partitioning.md)                 |
+| 015 | 垂直パーティショニング                           | 参照頻度の低い列を別テーブルへ移し、よく使う行を狭く保つ。                                           | [sql](src/015_vertical_partitioning.sql)                   | [doc](docs/patterns/015-vertical-partitioning.md)                   |
+| 016 | 階層データのモデリング                           | ツリー構造を、パス列挙と `hierarchyid` 型でモデル化する。                                            | [sql](src/016_modeling_hierarchical_data.sql)              | [doc](docs/patterns/016-modeling-hierarchical-data.md)              |
+| 017 | サブタイプテーブル（ソフトウェア）               | 種類ごとに固有の属性をサブタイプテーブルへ移す（スーパータイプ／サブタイプ）。                       | [sql](src/017_software_product_table.sql)                  | [doc](docs/patterns/017-software-product-table.md)                  |
+| 018 | サブタイプテーブルと再構成ビュー                 | もう 1 つのサブタイプテーブルと、統一された商品の形を再構成するビュー。                              | [sql](src/018_hardware_product_table.sql)                  | [doc](docs/patterns/018-hardware-product-table.md)                  |
+| 019 | 多言語データと照合順序                           | 多言語テキストを正しく保存・ソート・比較し、照合順序の落とし穴を避ける。                             | [sql](src/019_handling_multilanguage_data.sql)             | [doc](docs/patterns/019-handling-multilanguage-data.md)             |
+| 020 | 論理削除（ソフトデリート）                       | 行を削除せず「削除済み」と印を付ける方法と、それに伴うクエリの変更。                                 | [sql](src/020_soft_delete.sql)                             | [doc](docs/patterns/020-soft-delete.md)                             |
+| 021 | JSON による非正規化                              | 参照の多い集約データを JSON ドキュメントとして保存し、繰り返しの結合を避ける。                       | [sql](src/021_denormalization_with_json.sql)               | [doc](docs/patterns/021-denormalization-with-json.md)               |
+| 022 | 計算列と集計値の維持                             | 導出値（平均評価）を事前計算し、永続化・インデックス化して保つ。                                     | [sql](src/022_computed_column.sql)                         | [doc](docs/patterns/022-computed-column.md)                         |
+| 023 | 機密データの保護（マスキング・暗号化）           | マスキング・ビュー・列暗号化により、ロールごとに PII の見え方を変える。                              | [sql](src/023_sensitive_data_obfuscation.sql)              | [doc](docs/patterns/023-sensitive-data-obfuscation.md)              |
+| 024 | 連番・カレンダーテーブルとインデックス付きビュー | 事前計算した連番／カレンダーテーブルと、マテリアライズド（インデックス付き）集計ビュー。             | [sql](src/024_precalculated_tables_and_indexed_views.sql)  | [doc](docs/patterns/024-precalculated-tables-and-indexed-views.md)  |
+| 025 | クエリオプティマイザーの統計情報                 | 統計情報がオプティマイザーのプラン選択をどう左右し、古い／偏った統計が何を招くか。                   | [sql](src/025_statistics.sql)                              | [doc](docs/patterns/025-statistics.md)                              |
 
 ---
 
@@ -346,4 +348,4 @@ docker exec onlinestore-sqlserver bash -c \
 
 ## ライセンス
 
-コードおよびドキュメントは © Michał Panasiuk、[MIT ライセンス](LICENSE) のもとで公開しています。もともとは Udemy 講座『Advanced Database Design Patterns in Action』のために作成したものです。
+コードおよびドキュメントは © Michał Panasiuk、[MIT ライセンス](LICENSE) のもとで公開しています。
