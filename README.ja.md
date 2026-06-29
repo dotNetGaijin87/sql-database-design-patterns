@@ -138,7 +138,8 @@ docker exec onlinestore-sqlserver bash -c \
 │   ├── images/          # 図・スクリーンショット
 │   └── slides.pdf       # 講座のスライド全編
 ├── docker-compose.yml   # SQL Server 2022 をワンコマンドで起動
-└── README.md
+├── README.md            # 本ファイル（英語）
+└── README.ja.md         # 日本語版
 ```
 
 ## 命名規則

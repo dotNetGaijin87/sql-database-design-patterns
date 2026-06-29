@@ -130,7 +130,8 @@ Then re-run the sequence above to rebuild from `000`. (To wipe everything includ
 │   ├── images/          # Diagrams & screenshots
 │   └── slides.pdf       # Full course slide deck
 ├── docker-compose.yml   # One-command SQL Server 2022
-└── README.md
+├── README.md            # This file (English)
+└── README.ja.md         # Japanese translation
 ```
 
 ## Naming conventions
