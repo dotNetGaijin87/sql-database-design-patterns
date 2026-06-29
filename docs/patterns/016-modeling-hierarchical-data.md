@@ -1,6 +1,6 @@
 # 016 — Hierarchical Data: Path Enumeration vs. HierarchyID
 
-**Script:** [`src/016_modeling_hierarchical_data.sql`](../../src/016_modeling_hierarchical_data.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/016_modeling_hierarchical_data.sql`](../../src/016_modeling_hierarchical_data.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 The `product_category` tree is stored as an **adjacency list** (`parent_category_id`). That's simple, but it makes "give me all descendants of this category" or "move this whole subtree" awkward and recursive.
@@ -15,4 +15,4 @@ Recursive CTE, the `hierarchyid` type and its methods (`IsDescendantOf`, `GetAnc
 `hierarchyid` is compact and supports reparenting cleanly, but it's opaque binary that's awkward to read and debug. Path enumeration is human-readable but bloats with depth and is fragile under string manipulation. Both need careful index choices, and neither enforces tree integrity the way a plain adjacency-list FK does — so the "best" model genuinely depends on your read/write mix.
 
 ---
-[← 015 Vertical partitioning](015-vertical-partitioning.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 017 Subtype table (software)](017-software-product-table.md)
+[← 015 Vertical partitioning](015-vertical-partitioning.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 017 Subtype table (software)](017-software-product-table.md)

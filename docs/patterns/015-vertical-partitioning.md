@@ -1,6 +1,6 @@
 # 015 — Vertical Partitioning (Column Splitting)
 
-**Script:** [`src/015_vertical_partitioning.sql`](../../src/015_vertical_partitioning.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/015_vertical_partitioning.sql`](../../src/015_vertical_partitioning.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 A wide, rarely-read `description` column bloats every `customer` row. Because fewer rows fit per data page, *every* common query that never even touches `description` reads more pages and runs slower.
@@ -15,4 +15,4 @@ Vertical partitioning (1:1 table split), shared-key FK, `ALTER INDEX REBUILD`, p
 Splitting columns only helps when the moved columns are *genuinely cold*. If queries frequently need both halves, the extra join can cost more than the I/O you saved — so this backfires for wide-range or combined-column access. Measure your actual access pattern before splitting.
 
 ---
-[← 014 Horizontal partitioning](014-horizontal-partitioning.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 016 Hierarchical data](016-modeling-hierarchical-data.md)
+[← 014 Horizontal partitioning](014-horizontal-partitioning.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 016 Hierarchical data](016-modeling-hierarchical-data.md)

@@ -1,6 +1,6 @@
 # 000 — Initial Schema & Diagnostic Tooling
 
-**Script:** [`src/000_initial_schema_creation.sql`](../../src/000_initial_schema_creation.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/000_initial_schema_creation.sql`](../../src/000_initial_schema_creation.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 A greenfield e-commerce app needs a starting relational schema — and, just as importantly, the introspection tooling that every later refactoring lesson relies on to *prove* an improvement actually happened.
@@ -17,4 +17,4 @@ The schema is **deliberately imperfect** — it embeds anti-patterns (a denormal
 The diagnostic procedures use `DBCC PAGE` and `DBCC DROPCLEANBUFFERS`, which are undocumented and/or disruptive — great for a learning lab, unsuitable for a production server. The embedded anti-patterns are intentional teaching scaffolding, not a recommended starting design.
 
 ---
-[Pattern index](../../README.en.md#the-26-patterns) · [next → 001 Natural vs. surrogate keys](001-primary-key.md)
+[Pattern index](../../README.md#the-25-patterns) · [next → 001 Natural vs. surrogate keys](001-primary-key.md)

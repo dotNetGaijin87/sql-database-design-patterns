@@ -1,6 +1,6 @@
 # 019 — Multi-Language Data, Collations & Translation Tables
 
-**Script:** [`src/019_handling_multilanguage_data.sql`](../../src/019_handling_multilanguage_data.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/019_handling_multilanguage_data.sql`](../../src/019_handling_multilanguage_data.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 The app must store, sort and compare data in multiple languages (English, Polish, Japanese). Get collation or `VARCHAR` vs. `NVARCHAR` wrong and you silently get wrong sort orders, lost accents, and — subtly — full index scans from implicit conversions.
@@ -15,4 +15,4 @@ Collations (SQL vs. Windows, CI/CS, binary), the `COLLATE` clause, `fn_helpcolla
 `NVARCHAR` doubles storage for text that never actually needs Unicode, and a translation table adds a join to every localized read. Mixing `VARCHAR` columns with `N''` literals under SQL collations forces index scans. The lesson: collation and type choices must be **deliberate**, not whatever the column defaulted to.
 
 ---
-[← 018 Subtype table + reassembly view](018-hardware-product-table.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 020 Soft delete](020-soft-delete.md)
+[← 018 Subtype table + reassembly view](018-hardware-product-table.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 020 Soft delete](020-soft-delete.md)

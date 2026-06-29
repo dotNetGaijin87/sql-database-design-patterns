@@ -1,6 +1,6 @@
 # 014 — Horizontal (Range) Partitioning & Sliding Window
 
-**Script:** [`src/014_horizontal_partitioning.sql`](../../src/014_horizontal_partitioning.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/014_horizontal_partitioning.sql`](../../src/014_horizontal_partitioning.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 A large time-series `order_report` table needs to **archive last year's data and load this year's instantly**, and to keep date-range scans fast — without rewriting the whole table every time.
@@ -15,4 +15,4 @@ Creates per-year filegroups and files, a `RANGE RIGHT` partition function and sc
 Partitioning adds substantial administrative complexity — filegroups, aligned indexes, boundary management — and only helps when queries align to the partition key. Metadata-only `SWITCH`/`MERGE` operations require correct boundaries and matching constraints, or they silently trigger expensive data movement. It is an archival/maintenance tool, **not** a general "make my query faster" button.
 
 ---
-[← 013 Effective-dating & temporal tables](013-history-table-effective-start-end-dates.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 015 Vertical partitioning](015-vertical-partitioning.md)
+[← 013 Effective-dating & temporal tables](013-history-table-effective-start-end-dates.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 015 Vertical partitioning](015-vertical-partitioning.md)

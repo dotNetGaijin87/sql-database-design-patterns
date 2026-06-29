@@ -1,6 +1,6 @@
 # 018 — Subtype Table for Hardware + Reassembly View
 
-**Script:** [`src/018_hardware_product_table.sql`](../../src/018_hardware_product_table.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/018_hardware_product_table.sql`](../../src/018_hardware_product_table.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 Just like software ([017](017-software-product-table.md)), hardware-only attributes (`weight`, dimensions) sit on the base `product` table as mostly-`NULL` columns. But application code still wants to read a single, unified product shape — it shouldn't have to know about the subtype split.
@@ -15,4 +15,4 @@ Subtype table, shared-PK FK, path-based category exclusion (`NOT LIKE`), `LEFT J
 The reassembly view reintroduces the wide, nullable shape and pays for two outer joins on every read. The supertype/subtype design trades simpler, smaller writes for more complex reads — worthwhile only when the subtypes carry substantial distinct attributes. If reads dominate and the attribute sets are small, the original flat table may simply be the better engineering choice.
 
 ---
-[← 017 Subtype table (software)](017-software-product-table.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 019 Multi-language data & collations](019-handling-multilanguage-data.md)
+[← 017 Subtype table (software)](017-software-product-table.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 019 Multi-language data & collations](019-handling-multilanguage-data.md)

@@ -1,6 +1,6 @@
 # 013 — Effective-Dating & System-Versioned Temporal Tables
 
-**Script:** [`src/013_history_table_effective_start_end_dates.sql`](../../src/013_history_table_effective_start_end_dates.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/013_history_table_effective_start_end_dates.sql`](../../src/013_history_table_effective_start_end_dates.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 Some data is only valid for a window of time — a promotion runs from one date to another — and the business needs **both** the validity range *and* a full audit trail of how the data changed over time. These are two different questions, and conflating them leads to bugs.
@@ -15,4 +15,4 @@ Effective-date range modeling, `RANK() OVER (PARTITION BY ...)`, correlated subq
 This is the key distinction the script teaches: system-versioned temporal tables capture **transaction time** (when a row physically changed), *not* **business validity time** (when a promotion is meant to apply). Use temporal tables for audit/"what did the row look like then"; use explicit effective-date columns for business validity. Temporal history also grows with every update, and manual date ranges require application discipline to avoid gaps and overlaps.
 
 ---
-[← 012 Status history & event sourcing](012-history-table-effective-date.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 014 Horizontal partitioning](014-horizontal-partitioning.md)
+[← 012 Status history & event sourcing](012-history-table-effective-date.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 014 Horizontal partitioning](014-horizontal-partitioning.md)

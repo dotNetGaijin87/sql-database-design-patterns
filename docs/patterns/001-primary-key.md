@@ -1,6 +1,6 @@
 # 001 — Natural vs. Surrogate Keys
 
-**Script:** [`src/001_primary_key.sql`](../../src/001_primary_key.sql) · [Pattern index](../../README.en.md#the-26-patterns)
+**Script:** [`src/001_primary_key.sql`](../../src/001_primary_key.sql) · [Pattern index](../../README.md#the-25-patterns)
 
 ## The problem
 The product is referenced everywhere by a surrogate `product_id`, but the business already has a unique `product_number`. Should the primary key be the meaningless auto-increment integer, or the meaningful business key? This script works through actually switching to the natural key without breaking any child tables.
@@ -15,4 +15,4 @@ Propagates `product_number` into `order_item`, `review` and `review_image`; drop
 Natural keys propagate a wider value (a `VARCHAR(7)` vs. an `INT`) into every child table *and* every clustered index, increasing storage and index size. And if the supposedly immutable business key ever changes, you face cascading updates across the whole database. A stable surrogate key is often the safer default — the value here is understanding the trade-off, not blindly preferring either.
 
 ---
-[← 000 Initial schema](000-initial-schema.md) · [Pattern index](../../README.en.md#the-26-patterns) · [next → 002 Indexing strategy](002-indexing-strategy.md)
+[← 000 Initial schema](000-initial-schema.md) · [Pattern index](../../README.md#the-25-patterns) · [next → 002 Indexing strategy](002-indexing-strategy.md)
