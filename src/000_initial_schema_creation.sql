@@ -165,7 +165,7 @@ GO
 
 --------------------------------------------------------
 -- This procedure gets filegroup and row count
--- infromation for the passed tables
+-- information for the passed tables
 --------------------------------------------------------
 CREATE OR ALTER PROCEDURE dbo.get_table_filegroup_row_count_info
 (
