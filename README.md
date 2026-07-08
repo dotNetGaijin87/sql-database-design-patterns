@@ -20,7 +20,7 @@ This portfolio is built as a **sequence of 26 migration scripts**, each tackling
 
 ### After — once all 26 migrations are applied
 
-Lookup, junction and subtype tables; history and i18n tables; natural keys; and JSON-denormalised reviews — the cumulative result of running every migration in order. The annotations show which migration introduced each change. _(Standalone utility tables — `number`, `calendar`, `migration_history` — and the partitioning-demo `order_report` family are omitted for clarity.)_
+Lookup, junction and subtype tables; history and i18n tables; natural keys; and JSON-denormalized reviews — the cumulative result of running every migration in order. The annotations show which migration introduced each change. _(Standalone utility tables — `number`, `calendar`, `migration_history` — and the partitioning-demo `order_report` family are omitted for clarity.)_
 
 [![OnlineStore schema — after all migrations](docs/images/schema-after.png)](docs/images/schema-after.svg)
 
